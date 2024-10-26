@@ -2,7 +2,9 @@ a custom stepper without used any packages and simple to use.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+This is a demo of my custom widget:
+
+![Demo of Custom Stepper](https://github.com/Ramtinmoradi/customer_stepper/blob/master/example/assets/custom_stepper.gif)
 
 ## Usage
 
