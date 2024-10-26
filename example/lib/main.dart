@@ -49,7 +49,16 @@ class _MyAppState extends State<MyApp> {
         itemCount: 8,
         activeStep: currentStep,
         textStyle: const TextStyle(fontSize: 14.0, color: Colors.black),
-        titles: const ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5', 'Step 6', 'Step 7', 'Step 8'],
+        titles: const [
+          'Step 1',
+          'Step 2',
+          'Step 3',
+          'Step 4',
+          'Step 5',
+          'Step 6',
+          'Step 7',
+          'Step 8'
+        ],
         duration: const Duration(milliseconds: 2000),
         color: Colors.blueAccent,
         bodyChild: Container(
