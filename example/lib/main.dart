@@ -21,6 +21,26 @@ class _MyAppState extends State<MyApp> {
     });
   }
 
+  getColor(int index) {
+    if (index == 0) {
+      return Colors.red;
+    } else if (index == 1) {
+      return Colors.green;
+    } else if (index == 2) {
+      return Colors.blue;
+    } else if (index == 3) {
+      return Colors.orange;
+    } else if (index == 4) {
+      return Colors.white;
+    } else if (index == 5) {
+      return Colors.brown;
+    } else if (index == 6) {
+      return Colors.cyan;
+    } else if (index == 7) {
+      return Colors.purple;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -29,10 +49,12 @@ class _MyAppState extends State<MyApp> {
         itemCount: 8,
         activeStep: currentStep,
         textStyle: const TextStyle(fontSize: 14.0, color: Colors.black),
-        titles: const ['شروع', 'کارشناسی', 'اظهارات', 'کالا', 'خدمت', 'اتمام کار', 'صورت حساب', 'پرداخت'],
+        titles: const ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5', 'Step 6', 'Step 7', 'Step 8'],
         duration: const Duration(milliseconds: 2000),
         color: Colors.blueAccent,
-        bodyChild: Container(),
+        bodyChild: Container(
+          color: getColor(currentStep),
+        ),
         footerChild: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -40,13 +62,13 @@ class _MyAppState extends State<MyApp> {
               onPressed: () {
                 goToStep(currentStep + 1);
               },
-              child: const Text('plus'),
+              child: const Text('Next step'),
             ),
             ElevatedButton(
               onPressed: () {
                 goToStep(currentStep - 1);
               },
-              child: const Text('mineus'),
+              child: const Text('previous step'),
             ),
           ],
         ),
