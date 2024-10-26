@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class CustomStepper extends StatefulWidget {
-  const CustomStepper({
+class SimpleFlutterStepper extends StatefulWidget {
+  const SimpleFlutterStepper({
     super.key,
     this.curve,
     this.width,
@@ -39,10 +39,10 @@ class CustomStepper extends StatefulWidget {
   final List<String> titles;
 
   @override
-  State<CustomStepper> createState() => _CustomStepperState();
+  State<SimpleFlutterStepper> createState() => _SimpleFlutterStepperState();
 }
 
-class _CustomStepperState extends State<CustomStepper> with SingleTickerProviderStateMixin {
+class _SimpleFlutterStepperState extends State<SimpleFlutterStepper> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late List<bool> stepShown;
   int previousActiveStep = -1;
@@ -62,7 +62,7 @@ class _CustomStepperState extends State<CustomStepper> with SingleTickerProvider
   }
 
   @override
-  void didUpdateWidget(covariant CustomStepper oldWidget) {
+  void didUpdateWidget(covariant SimpleFlutterStepper oldWidget) {
     super.didUpdateWidget(oldWidget);
     if (widget.activeStep != previousActiveStep) {
       setState(() {

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:custom_stepper/custom_stepper.dart';
+import 'package:simple_flutter_stepper/simple_flutter_stepper.dart';
 
 void main() {
   runApp(const MyApp());
@@ -45,7 +45,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: CustomStepper(
+      home: SimpleFlutterStepper(
         itemCount: 8,
         activeStep: currentStep,
         textStyle: const TextStyle(fontSize: 14.0, color: Colors.black),

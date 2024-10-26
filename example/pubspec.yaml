@@ -13,7 +13,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  custom_stepper:
+  simple_flutter_stepper:
     path: ../
 
 dev_dependencies:

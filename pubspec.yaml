@@ -1,8 +1,8 @@
-name: custom_stepper
-description: "custome stepper for use simple"
+name: simple_flutter_stepper
+description: "simple flutter stepper for use simple"
 version: 0.0.1
-homepage: https://github.com/Ramtinmoradi/custom_stepper.git
-repository: https://github.com/Ramtinmoradi/custom_stepper.git
+homepage: https://github.com/Ramtinmoradi/simple_flutter_stepper.git
+repository: https://github.com/Ramtinmoradi/simple_flutter_stepper.git
 license: MIT
 
 environment:
