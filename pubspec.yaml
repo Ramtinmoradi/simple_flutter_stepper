@@ -3,6 +3,7 @@ description: "custome stepper for use simple"
 version: 0.0.1
 homepage: https://github.com/Ramtinmoradi/custom_stepper.git
 repository: https://github.com/Ramtinmoradi/custom_stepper.git
+license: MIT
 
 environment:
   sdk: ^3.5.3
