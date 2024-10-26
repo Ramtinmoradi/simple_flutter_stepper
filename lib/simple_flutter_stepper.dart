@@ -42,7 +42,8 @@ class SimpleFlutterStepper extends StatefulWidget {
   State<SimpleFlutterStepper> createState() => _SimpleFlutterStepperState();
 }
 
-class _SimpleFlutterStepperState extends State<SimpleFlutterStepper> with SingleTickerProviderStateMixin {
+class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
+    with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late List<bool> stepShown;
   int previousActiveStep = -1;
@@ -121,15 +122,16 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper> with Single
                             SizedBox(height: 8.0),
                             SizedBox(
                               height: 20.0,
-                              child: widget.activeStep == index && stepShown[index]
-                                  ? FadeTransition(
-                                      opacity: _controller,
-                                      child: Text(
-                                        widget.titles[index],
-                                        style: widget.textStyle,
-                                      ),
-                                    )
-                                  : const SizedBox(),
+                              child:
+                                  widget.activeStep == index && stepShown[index]
+                                      ? FadeTransition(
+                                          opacity: _controller,
+                                          child: Text(
+                                            widget.titles[index],
+                                            style: widget.textStyle,
+                                          ),
+                                        )
+                                      : const SizedBox(),
                             ),
                           ],
                         ),
