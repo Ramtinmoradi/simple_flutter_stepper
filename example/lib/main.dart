@@ -61,6 +61,10 @@ class _MyAppState extends State<MyApp> {
         ],
         duration: const Duration(milliseconds: 2000),
         color: Colors.blueAccent,
+        appBar: AppBar(
+          centerTitle: true,
+          title: const Text('Simple Stepper'),
+        ),
         bodyChild: Container(
           color: getColor(currentStep),
         ),
@@ -77,7 +81,7 @@ class _MyAppState extends State<MyApp> {
               onPressed: () {
                 goToStep(currentStep - 1);
               },
-              child: const Text('previous step'),
+              child: const Text('Previous step'),
             ),
           ],
         ),

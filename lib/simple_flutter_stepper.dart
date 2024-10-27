@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
+///Build simple and easy stepper for your project
 class SimpleFlutterStepper extends StatefulWidget {
+  ///in this constructors you need to set a series of values ​​for a better display.
   const SimpleFlutterStepper({
     super.key,
     this.curve,
     this.width,
+    this.appBar,
     this.textDirection,
     required this.color,
     required this.titles,
@@ -16,27 +19,41 @@ class SimpleFlutterStepper extends StatefulWidget {
     required this.footerChild,
   });
 
+  ///The Color for stepper container
   final Color color;
 
+  ///The curve for how show animations
   final Curve? curve;
 
+  ///Width for stepper containers
   final double? width;
 
+  ///How many step you need build in stepper
   final int itemCount;
 
+  ///which step is active in your steps
   final int activeStep;
 
+  ///The middle Widget to show users and work with for complete the steps
   final Widget bodyChild;
 
+  ///Time to show and work animations
   final Duration duration;
 
+  ///The Footer widget for use button to handle go next step or previous step
   final Widget footerChild;
 
+  ///Style of step text
   final TextStyle textStyle;
 
+  ///Show rtl or ltr default is rtl
   final TextDirection? textDirection;
 
+  ///The list of title of step
   final List<String> titles;
+
+  ///The appbar forshow in scaffold
+  final PreferredSizeWidget? appBar;
 
   @override
   State<SimpleFlutterStepper> createState() => _SimpleFlutterStepperState();
@@ -84,6 +101,7 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: widget.appBar,
       body: SafeArea(
         child: Directionality(
           textDirection: widget.textDirection ?? TextDirection.rtl,
@@ -156,6 +174,7 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
   }
 }
 
+///if User has no size for width step container we use this method to get width in active and deactive step
 double defaultWidth(BuildContext context, {required bool condition}) {
   if (condition) {
     return MediaQuery.sizeOf(context).width * 0.2;
