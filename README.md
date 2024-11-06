@@ -4,7 +4,7 @@ a custom stepper without used any packages and simple to use.
 
 This is a demo of my custom widget:
 
-![Demo of Custom Stepper](example/assets/custom-stepper-example.gif)
+![Demo of Custom Stepper](example/assets/simple_flutter_stepper.webm)
 
 ## Usage
 
