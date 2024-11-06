@@ -15,12 +15,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   int currentStep = 0;
 
-  void goToStep(int step) {
-    setState(() {
-      currentStep = step.clamp(0, 7);
-    });
-  }
-
   getColor(int index) {
     if (index == 0) {
       return Colors.red;
@@ -41,49 +35,34 @@ class _MyAppState extends State<MyApp> {
     }
   }
 
+  goToStep(int step) {
+    setState(() {
+      currentStep = step.clamp(0, 7);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SimpleFlutterStepper(
+        nextOnTap: () => goToStep(currentStep + 1),
+        previousOnTap: () => goToStep(currentStep - 1),
         itemCount: 8,
+        disableColor: Colors.grey,
         activeStep: currentStep,
         textStyle: const TextStyle(fontSize: 14.0, color: Colors.black),
-        titles: const [
-          'Step 1',
-          'Step 2',
-          'Step 3',
-          'Step 4',
-          'Step 5',
-          'Step 6',
-          'Step 7',
-          'Step 8'
-        ],
+        titles: const ['Step 1', 'Step 2', 'Step 3', 'Step 4', 'Step 5', 'Step 6', 'Step 7', 'Step 8'],
         duration: const Duration(milliseconds: 2000),
-        color: Colors.blueAccent,
+        activeColor: Colors.blueAccent,
         appBar: AppBar(
           centerTitle: true,
           title: const Text('Simple Stepper'),
         ),
+        previousButtonTitle: 'Previous',
+        nextButtonTitle: 'Next',
         bodyChild: Container(
           color: getColor(currentStep),
-        ),
-        footerChild: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                goToStep(currentStep + 1);
-              },
-              child: const Text('Next step'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                goToStep(currentStep - 1);
-              },
-              child: const Text('Previous step'),
-            ),
-          ],
         ),
       ),
     );

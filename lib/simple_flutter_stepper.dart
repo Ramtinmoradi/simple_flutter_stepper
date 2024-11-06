@@ -9,18 +9,30 @@ class SimpleFlutterStepper extends StatefulWidget {
     this.width,
     this.appBar,
     this.textDirection,
-    required this.color,
+    this.backgroundColor,
+    required this.previousOnTap,
+    required this.nextOnTap,
+    this.previousButtonTitle,
+    this.nextButtonTitle,
+    this.nextButtonTextStyle,
+    this.previousButtonTextStyle,
+    this.nextButtonStyle,
+    this.previousButtonStyle,
+    required this.activeColor,
+    required this.disableColor,
     required this.titles,
     required this.duration,
     required this.textStyle,
     required this.itemCount,
     required this.activeStep,
     required this.bodyChild,
-    required this.footerChild,
   });
 
-  ///The Color for stepper container
-  final Color color;
+  ///The Color for active step
+  final Color activeColor;
+
+  ///The Color for active step
+  final Color disableColor;
 
   ///The curve for how show animations
   final Curve? curve;
@@ -40,9 +52,6 @@ class SimpleFlutterStepper extends StatefulWidget {
   ///Time to show and work animations
   final Duration duration;
 
-  ///The Footer widget for use button to handle go next step or previous step
-  final Widget footerChild;
-
   ///Style of step text
   final TextStyle textStyle;
 
@@ -52,15 +61,41 @@ class SimpleFlutterStepper extends StatefulWidget {
   ///The list of title of step
   final List<String> titles;
 
-  ///The appbar forshow in scaffold
+  ///The appbar for show in scaffold
   final PreferredSizeWidget? appBar;
+
+  ///Background Color of scaffold
+  final Color? backgroundColor;
+
+  ///Set onPressed for previous button
+  final VoidCallback previousOnTap;
+
+  ///Set onPressed for next button
+  final VoidCallback nextOnTap;
+
+  ///Title for previous button
+  final String? previousButtonTitle;
+
+  ///Title for next button
+  final String? nextButtonTitle;
+
+  ///Style of next button title
+  final TextStyle? nextButtonTextStyle;
+
+  ///Style of previous button title
+  final TextStyle? previousButtonTextStyle;
+
+  ///Style of next button
+  final ButtonStyle? nextButtonStyle;
+
+  ///Style of previous button
+  final ButtonStyle? previousButtonStyle;
 
   @override
   State<SimpleFlutterStepper> createState() => _SimpleFlutterStepperState();
 }
 
-class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
-    with SingleTickerProviderStateMixin {
+class _SimpleFlutterStepperState extends State<SimpleFlutterStepper> with SingleTickerProviderStateMixin {
   late AnimationController _controller;
   late List<bool> stepShown;
   int previousActiveStep = -1;
@@ -72,10 +107,19 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
       duration: widget.duration,
     )..forward();
 
-    stepShown = List<bool>.filled(widget.itemCount, false);
+    if (widget.itemCount == widget.titles.length) {
+      stepShown = List<bool>.filled(widget.itemCount, false);
 
-    stepShown[0] = true;
-
+      stepShown[0] = true;
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Center(
+            child: Text('Please check your itemCount and titles list length'),
+          ),
+        ),
+      );
+    }
     super.initState();
   }
 
@@ -101,6 +145,7 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: widget.backgroundColor,
       appBar: widget.appBar,
       body: SafeArea(
         child: Directionality(
@@ -134,22 +179,23 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
                                 borderRadius: BorderRadius.all(
                                   Radius.circular(50.0),
                                 ),
-                                color: widget.color,
+                                color: stepShown[index] == true ? widget.activeColor : widget.disableColor,
                               ),
                             ),
                             SizedBox(height: 8.0),
                             SizedBox(
                               height: 20.0,
-                              child:
-                                  widget.activeStep == index && stepShown[index]
-                                      ? FadeTransition(
-                                          opacity: _controller,
-                                          child: Text(
-                                            widget.titles[index],
-                                            style: widget.textStyle,
-                                          ),
-                                        )
-                                      : const SizedBox(),
+                              child: widget.activeStep == index && stepShown[index]
+                                  ? FadeTransition(
+                                      opacity: _controller,
+                                      child: Text(
+                                        widget.titles[index],
+                                        style: widget.textStyle.copyWith(
+                                          color: widget.activeStep == index ? widget.activeColor : null,
+                                        ),
+                                      ),
+                                    )
+                                  : const SizedBox(),
                             ),
                           ],
                         ),
@@ -164,7 +210,44 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
               ),
               Flexible(
                 flex: 1,
-                child: widget.footerChild,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    Visibility(
+                      visible: widget.nextButtonTitle != null,
+                      child: ElevatedButton(
+                        style: widget.nextButtonStyle,
+                        onPressed: () {
+                          setState(() {
+                            stepShown[widget.activeStep] = true;
+                          });
+                          widget.nextOnTap();
+                        },
+                        child: Text(
+                          widget.nextButtonTitle!,
+                          style: widget.nextButtonTextStyle,
+                        ),
+                      ),
+                    ),
+                    Visibility(
+                      visible: widget.previousButtonTitle != null,
+                      child: ElevatedButton(
+                        style: widget.previousButtonStyle,
+                        onPressed: () {
+                          setState(() {
+                            stepShown[widget.activeStep] = false;
+                          });
+
+                          widget.previousOnTap();
+                        },
+                        child: Text(
+                          widget.previousButtonTitle!,
+                          style: widget.previousButtonTextStyle,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
@@ -174,7 +257,7 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
   }
 }
 
-///if User has no size for width step container we use this method to get width in active and deactive step
+///if User has no size for width step container we use this method to get width in active and deActive step
 double defaultWidth(BuildContext context, {required bool condition}) {
   if (condition) {
     return MediaQuery.sizeOf(context).width * 0.2;

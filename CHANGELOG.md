@@ -4,3 +4,9 @@
 ## [0.0.5] - 2024-10-27
 - add appbar to scaffold for use it.
 - add simple docs for package.
+- 
+## [0.0.6] - 2024-11-06
+- add backgroundColor for scaffold
+- remove footer widget
+- add ElevatedButton for handle step and we can customize
+- add disableColor and activeColor for each step
