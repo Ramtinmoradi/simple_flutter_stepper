@@ -46,6 +46,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SimpleFlutterStepper(
+        buttonPadding: const EdgeInsets.all(8),
         nextOnTap: () => goToStep(currentStep + 1),
         previousOnTap: () => goToStep(currentStep - 1),
         itemCount: 8,
@@ -68,7 +69,7 @@ class _MyAppState extends State<MyApp> {
           centerTitle: true,
           title: const Text('Simple Stepper'),
         ),
-        previousButtonTitle: 'Previous',
+        previousButtonTitle: currentStep == 0 ? 'Previous' : null,
         nextButtonTitle: 'Next',
         bodyChild: Container(
           color: getColor(currentStep),

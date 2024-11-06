@@ -58,6 +58,7 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: SimpleFlutterStepper(
+        buttonPadding: const EdgeInsets.all(8),
         nextOnTap: () => goToStep(currentStep + 1),
         previousOnTap: () => goToStep(currentStep - 1),
         itemCount: 8,

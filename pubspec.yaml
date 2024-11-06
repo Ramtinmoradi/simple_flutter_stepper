@@ -1,6 +1,6 @@
 name: simple_flutter_stepper
 description: "A simple package to make a stepper easily and quickly. Using the simplest methods and better customizations."
-version: 0.0.7
+version: 0.0.9
 homepage: https://github.com/Ramtinmoradi/simple_flutter_stepper.git
 repository: https://github.com/Ramtinmoradi/simple_flutter_stepper.git
 license: MIT

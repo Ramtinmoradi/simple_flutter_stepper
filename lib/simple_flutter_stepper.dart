@@ -26,6 +26,7 @@ class SimpleFlutterStepper extends StatefulWidget {
     required this.itemCount,
     required this.activeStep,
     required this.bodyChild,
+    required this.buttonPadding,
   });
 
   ///The Color for active step
@@ -90,6 +91,9 @@ class SimpleFlutterStepper extends StatefulWidget {
 
   ///Style of previous button
   final ButtonStyle? previousButtonStyle;
+
+  ///The padding for buttons
+  final EdgeInsetsGeometry buttonPadding;
 
   @override
   State<SimpleFlutterStepper> createState() => _SimpleFlutterStepperState();
@@ -216,12 +220,12 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
               ),
               Flexible(
                 flex: 1,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Visibility(
-                      visible: widget.nextButtonTitle != null,
-                      child: ElevatedButton(
+                child: Padding(
+                  padding: widget.buttonPadding,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      ElevatedButton(
                         style: widget.nextButtonStyle,
                         onPressed: () {
                           setState(() {
@@ -234,25 +238,24 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
                           style: widget.nextButtonTextStyle,
                         ),
                       ),
-                    ),
-                    Visibility(
-                      visible: widget.previousButtonTitle != null,
-                      child: ElevatedButton(
-                        style: widget.previousButtonStyle,
-                        onPressed: () {
-                          setState(() {
-                            stepShown[widget.activeStep] = false;
-                          });
+                      if (widget.previousButtonTitle != null &&
+                          widget.previousButtonTitle != '')
+                        ElevatedButton(
+                          style: widget.previousButtonStyle,
+                          onPressed: () {
+                            setState(() {
+                              stepShown[widget.activeStep] = false;
+                            });
 
-                          widget.previousOnTap();
-                        },
-                        child: Text(
-                          widget.previousButtonTitle!,
-                          style: widget.previousButtonTextStyle,
+                            widget.previousOnTap();
+                          },
+                          child: Text(
+                            widget.previousButtonTitle!,
+                            style: widget.previousButtonTextStyle,
+                          ),
                         ),
-                      ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
               ),
             ],
