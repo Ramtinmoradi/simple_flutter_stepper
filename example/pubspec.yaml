@@ -27,7 +27,7 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/custom-stepper-example.gif
+    - example/assets/simple_flutter_stepper.gif
   #   - images/a_dot_ham.jpeg
 
   # fonts:
