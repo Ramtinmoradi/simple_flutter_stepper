@@ -65,11 +65,11 @@ class _MyAppState extends State<MyApp> {
         ],
         duration: const Duration(milliseconds: 2000),
         activeColor: Colors.blueAccent,
-        appBar: AppBar(
-          centerTitle: true,
-          title: const Text('Simple Stepper'),
-        ),
-        previousButtonTitle: currentStep == 0 ? 'Previous' : null,
+        hasAppBar: true,
+        leadingIcon: Icons.arrow_back,
+        centerTitle: true,
+        appBarTitle: const Text('Simple Stepper'),
+        previousButtonTitle: currentStep == 0 ? 'Previous' : 'null',
         nextButtonTitle: 'Next',
         bodyChild: Container(
           color: getColor(currentStep),

@@ -8,6 +8,7 @@ class SimpleFlutterStepper extends StatefulWidget {
     this.curve,
     this.width,
     this.appBar,
+    this.hasAppBar = true,
     this.textDirection,
     this.backgroundColor,
     required this.previousOnTap,
@@ -27,6 +28,14 @@ class SimpleFlutterStepper extends StatefulWidget {
     required this.activeStep,
     required this.bodyChild,
     required this.buttonPadding,
+    this.nextButtonLoading = false,
+    this.nextButtonDisable = false,
+    this.loadingSize,
+    this.automaticallyImplyLeading = false,
+    this.centerTitle,
+    this.appBarTitle,
+    this.appBarBackgroundColor,
+    this.leadingIcon,
   });
 
   ///The Color for active step
@@ -65,6 +74,9 @@ class SimpleFlutterStepper extends StatefulWidget {
   ///The appbar for show in scaffold
   final PreferredSizeWidget? appBar;
 
+  ///The condition for show appbar
+  final bool? hasAppBar;
+
   ///Background Color of scaffold
   final Color? backgroundColor;
 
@@ -94,6 +106,30 @@ class SimpleFlutterStepper extends StatefulWidget {
 
   ///The padding for buttons
   final EdgeInsetsGeometry buttonPadding;
+
+  ///Loading for next button
+  final bool? nextButtonLoading;
+
+  ///Check validate for disable or enable next button onPressed and Color
+  final bool? nextButtonDisable;
+
+  ///NextButton Loading size
+  final double? loadingSize;
+
+  ///Control back button for leading
+  final bool? automaticallyImplyLeading;
+
+  ///For Center align title widget
+  final bool? centerTitle;
+
+  ///Color of appBar background
+  final Color? appBarBackgroundColor;
+
+  ///Widget for title
+  final Widget? appBarTitle;
+
+  ///set Icon for leading in appBar
+  final IconData? leadingIcon;
 
   @override
   State<SimpleFlutterStepper> createState() => _SimpleFlutterStepperState();
@@ -151,7 +187,33 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: widget.backgroundColor,
-      appBar: widget.appBar,
+      appBar: widget.hasAppBar == true
+          ? widget.appBar ??
+              AppBar(
+                elevation: 0.0,
+                automaticallyImplyLeading:
+                    widget.automaticallyImplyLeading ?? false,
+                centerTitle: widget.centerTitle,
+                title: widget.appBarTitle,
+                leading: Center(
+                  child: Padding(
+                    padding: EdgeInsets.only(right: 16.0),
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          stepShown[widget.activeStep] = false;
+                        });
+                        widget.previousOnTap();
+                      },
+                      child: Icon(
+                        widget.leadingIcon,
+                        color: widget.activeColor,
+                      ),
+                    ),
+                  ),
+                ),
+              )
+          : null,
       body: SafeArea(
         child: Directionality(
           textDirection: widget.textDirection ?? TextDirection.rtl,
@@ -226,17 +288,35 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
                       ElevatedButton(
-                        style: widget.nextButtonStyle,
-                        onPressed: () {
-                          setState(() {
-                            stepShown[widget.activeStep] = true;
-                          });
-                          widget.nextOnTap();
-                        },
-                        child: Text(
-                          widget.nextButtonTitle!,
-                          style: widget.nextButtonTextStyle,
-                        ),
+                        style: widget.nextButtonDisable == true
+                            ? widget.nextButtonStyle?.copyWith(
+                                backgroundColor:
+                                    WidgetStatePropertyAll(widget.disableColor),
+                              )
+                            : widget.nextButtonStyle,
+                        onPressed: widget.nextButtonDisable == true
+                            ? null
+                            : widget.nextButtonLoading == true
+                                ? null
+                                : () {
+                                    setState(() {
+                                      stepShown[widget.activeStep] = true;
+                                    });
+                                    widget.nextOnTap();
+                                  },
+                        child: widget.nextButtonLoading == true
+                            ? SizedBox.square(
+                                dimension: widget.loadingSize ?? 25.0,
+                                child: Center(
+                                  child: CircularProgressIndicator(
+                                    color: widget.activeColor,
+                                  ),
+                                ),
+                              )
+                            : Text(
+                                widget.nextButtonTitle!,
+                                style: widget.nextButtonTextStyle,
+                              ),
                       ),
                       if (widget.previousButtonTitle != null &&
                           widget.previousButtonTitle != '')

@@ -13,3 +13,9 @@
 
 ## [0.0.9] - 2024-11-06
 - fix null value check for previuse button
+
+## [0.1.0] - 2024-11-20
+- add next button loading
+- add next button disable condition
+- change appBar to enable or disable and use custom appBar or default appBar
+- add new parametr to controll beter stepper
