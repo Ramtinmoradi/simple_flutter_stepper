@@ -193,6 +193,7 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
                 elevation: 0.0,
                 automaticallyImplyLeading:
                     widget.automaticallyImplyLeading ?? false,
+                backgroundColor: widget.appBarBackgroundColor,
                 centerTitle: widget.centerTitle,
                 title: widget.appBarTitle,
                 leading: Center(
@@ -285,7 +286,7 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
                 child: Padding(
                   padding: widget.buttonPadding,
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       ElevatedButton(
                         style: widget.nextButtonDisable == true

@@ -19,3 +19,6 @@
 - add next button disable condition
 - change appBar to enable or disable and use custom appBar or default appBar
 - add new parametr to controll beter stepper
+
+## [0.1.1] - 2024-11-30
+- fix some issues
