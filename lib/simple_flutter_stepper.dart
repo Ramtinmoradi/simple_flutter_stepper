@@ -30,8 +30,9 @@ class SimpleFlutterStepper extends StatefulWidget {
     required this.buttonPadding,
     this.nextButtonLoading = false,
     this.nextButtonDisable = false,
-    this.loadingSize,
     this.automaticallyImplyLeading = false,
+    this.resizeToAvoidBottomInset = false,
+    this.loadingSize,
     this.centerTitle,
     this.appBarTitle,
     this.appBarBackgroundColor,
@@ -131,6 +132,9 @@ class SimpleFlutterStepper extends StatefulWidget {
   ///set Icon for leading in appBar
   final IconData? leadingIcon;
 
+  ///If true the [body] and the scaffold's floating widgets should size themselves to avoid the onscreen keyboard whose height is defined by the ambient [MediaQuery]'s [MediaQueryData.viewInsets] bottom property.
+  final bool resizeToAvoidBottomInset;
+
   @override
   State<SimpleFlutterStepper> createState() => _SimpleFlutterStepperState();
 }
@@ -186,6 +190,7 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: widget.resizeToAvoidBottomInset,
       backgroundColor: widget.backgroundColor,
       appBar: widget.hasAppBar == true
           ? widget.appBar ??

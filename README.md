@@ -10,49 +10,6 @@ This is a demo of my custom widget:
 
 
 ```dart
-import 'package:flutter/material.dart';
-import 'package:simple_flutter_stepper/simple_flutter_stepper.dart';
-
-void main() {
-  runApp(const MyApp());
-}
-
-class MyApp extends StatefulWidget {
-  const MyApp({super.key});
-
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
-  int currentStep = 0;
-
-  getColor(int index) {
-    if (index == 0) {
-      return Colors.red;
-    } else if (index == 1) {
-      return Colors.green;
-    } else if (index == 2) {
-      return Colors.blue;
-    } else if (index == 3) {
-      return Colors.orange;
-    } else if (index == 4) {
-      return Colors.white;
-    } else if (index == 5) {
-      return Colors.brown;
-    } else if (index == 6) {
-      return Colors.cyan;
-    } else if (index == 7) {
-      return Colors.purple;
-    }
-  }
-
-  goToStep(int step) {
-    setState(() {
-      currentStep = step.clamp(0, 7);
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -80,7 +37,6 @@ class _MyAppState extends State<MyApp> {
       ),
     );
   }
-}
 
 
 ```

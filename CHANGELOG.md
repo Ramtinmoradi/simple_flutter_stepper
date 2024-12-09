@@ -22,3 +22,6 @@
 
 ## [0.1.1] - 2024-11-30
 - fix some issues
+
+## [0.1.2] - 2024-12-09
+- add resizeToAvoidBottomInset
