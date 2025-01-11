@@ -215,7 +215,7 @@ class _SimpleFlutterStepperState extends State<SimpleFlutterStepper>
                         });
                         widget.appBarPreviousOnTap != null
                             ? widget.appBarPreviousOnTap!()
-                            : null;
+                            : widget.previousOnTap;
                       },
                       child: Icon(
                         widget.leadingIcon,
