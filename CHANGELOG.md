@@ -25,3 +25,6 @@
 
 ## [0.1.2] - 2024-12-09
 - add resizeToAvoidBottomInset
+
+## [0.1.3] - 2025-01-11
+- add appBarPreviousOnTap for controll appBarPrevious and previousButton
